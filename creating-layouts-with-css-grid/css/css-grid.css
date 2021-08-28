@@ -1,0 +1,22 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	/* Changes all direct children into grid items. */
+	/* By default 1 column 1 row grid. */
+	display: grid;
+	/* Number of columns and width. */
+	grid-template-columns: 15em auto 15em;
+	/* Number of rows and heights. */
+	/* min-content is minimum amount to fit content, and no more. */
+	/* auto only works here because of 100% height on html and body. */
+	grid-template-rows: min-content auto min-content;
+}
+
+header, footer {
+	/* Grid line to start at. */
+	grid-column-start: 1;
+	/* Grid line to end at. */
+	grid-column-end: 4;
+}
