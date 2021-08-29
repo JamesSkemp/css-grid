@@ -80,6 +80,40 @@ Content-responsive:
 	- `grid-` prefix is also acceptable.
 - `margin` on grid container for outer margin.
 
+### Positioning
+- Can use -1 for end position (or any negative numbers) instead of a positive number. Negative numbers count from the end of the row to the start.
+- However, avoid micromanaging.
+- On a grid item, can use span x to span a certain number of tracks.
+	- `grid-column-end: span 2;`
+- `grid-column: start / end;`
+	- `grid-column: 3 / 5;`
+	- `grid-column: 3 / span 2;`
+	- `grid-column: span 2;`
+	- `grid-row`
+- `grid-area: 2 / 1 / 5 / 6;` is grid row start, column start, row end, column end.
+	- May want to just use `grid-column` and `grid-row` for readability.
+
+### Alignment
+- Can align a grid on a web page or the content within a grid cell, and there must be extra space to align within.
+- Properties:
+	- `justify-content` default is start.
+		- Other options are center, end, space-around, space-between, and space-evenly. Controls entire grid.
+	- `align-content` default is start.
+		- Other options are center, end, space-around, space-between, and space-evenly. Controls entire grid.
+	- `justify-items` default is stretch.
+		- Other options (for this and next three properties) are start, center, and end. Controls content within grid item.
+	- `align-items` default is stretch. Controls content within grid item.
+	- `justify-self` default is stretch. Controls an individual item.
+	- `align-self` default is stretch. Controls an individual item.
+- Justify = left to right.
+- Align = top to bottom.
+
+### Accessibility
+- Can use `dense` in `grid-auto-flow` and it will try to fill in empty gaps (in the case of spanning grid items).
+- Can also use `order` to force items before/after items. Default is `order: 0;`.
+- However, try to keep the source order = display order.
+- Can also overlaps grid items by overlapping row/column placements. Combine with `z-index` as needed.
+
 
 
 
