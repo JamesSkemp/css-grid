@@ -26,6 +26,10 @@ header {
     padding: auto;
 }
 
+aside {
+    text-align: center;
+}
+
 aside img {
     max-width: 100%;
     padding: 0 1em;
@@ -61,17 +65,33 @@ main img {
     border-bottom: 4px solid black;
     text-align: center;
     text-decoration: none;
-    font-size: 1.25em;
+    font-size: 1em;
     padding: 0.75em;
     background: #23cfa7;
 }
 
-body > img {
+body img {
     object-fit: cover;
     max-width: 100%;
-    height: 10em;
 }
 
 footer {
     text-align: center;
+}
+
+a:active, :focus {
+    outline: 2px solid purple;
+    color: white;
+    background: purple;
+}
+
+.pies {
+    background: #23cfa7;
+    border-radius: 0.5em;
+    padding: 0.5em;
+}
+
+.pies img {
+    border-radius: 0.25em;
+    border: 2px white solid;
 }
