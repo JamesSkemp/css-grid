@@ -48,7 +48,10 @@ header, footer {
 Viewport-responsive:
 - Percentage
 - fr
+	- These will be min-content until all other tracks reach their growth limit (for example, `minmax()`).
 - auto
+	- Growth limit is `max-content`.
+	- This means if a `1fr` is used it won't get any larger than `max-content`.
 
 Content-responsive:
 - min-content
@@ -73,6 +76,12 @@ Content-responsive:
 	- Supports more than one size, in which case it will alternate.
 	- `grid-auto-columns` is the other.
 	- Depends upon `grid-auto-flow` definition.
+
+#### Determing track size (slide)
+1. All tracks start at their base size.
+2. Extra space is allocated evenly to tracks which haven't reached their growth limit.
+3. Additional remaining space is given to fractional unit (`fr`) tracks.
+4. If there are no fractional unit tracks, additional space is given to `auto` tracks.
 
 ### Gaps
 - `column-gap`, `row-gap`, and `gap` (shorthand) are the recommended properties.
@@ -114,6 +123,67 @@ Content-responsive:
 - However, try to keep the source order = display order.
 - Can also overlaps grid items by overlapping row/column placements. Combine with `z-index` as needed.
 
+### Naming
+- When defining track sizes, you can name them.
+	- `grid-template-columns: [left-edge] 1fr 1fr [midpoint] 1fr 1fr [right-edge];`
+	- Then use like `grid-column: left-edge / right-edge;`.
+- Something like `body { display: grid; grid-template-rows: [header-start] 2em 5em [header-end body-start] 10em 10em [body-end]; }` is a bit more conventional.
+- Can also use names within `repeat()` which can cause multiple named lines.
+	- When used for grid items, this will cause them to jump to the closest named line.
+	- Can put a number afte the name to use that instance.
+	- Can also use `span x` before to span over multiple, but be careful when repeating.
 
+#### Simple layouts
+```
+body {
+	display: grid;
+	grid-template-areas: "header header header"
+						"nav main aside"
+						"footer footer footer";
+	grid-template-rows: min-content auto min-content;
+	grid-template-columns: 15em 1fr 1fr;
+}
 
+header { grid-area: header; }
+nav { grid-area: nav; }
+main { grid-area: main; }
+aside { grid-area: aside; }
+footer { grid-area: footer; }
+```
 
+Good for simple layouts.
+
+- Must be rectangular shape.
+- Must have same number of cells.
+- `...` to define empty areas.
+- Lines automatically get names based upon area names.
+- Named lines automatically create named areas.
+
+Shorter version of the above:
+
+```
+body {
+	display: grid;
+	grid: "header header header" min-content "nav main aside" auto "footer footer footer" min-content / 15em 1fr 1fr;
+}
+```
+
+Or to improve readability:
+
+```
+body {
+	display: grid;
+	grid: "header header header" min-content
+		"nav main aside" auto
+		"footer footer footer" min-content /
+		15em 1fr 1fr;
+}
+```
+
+### Responsive design
+- Start small.
+- Use media queries. :|
+
+### Subgrids
+- May not be well supported (as of me typing this, still only Firefox supported).
+- You can of course put a grid within a grid.
