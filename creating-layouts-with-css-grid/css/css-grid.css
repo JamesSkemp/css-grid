@@ -12,6 +12,15 @@ body {
 	/* min-content is minimum amount to fit content, and no more. */
 	/* auto only works here because of 100% height on html and body. */
 	grid-template-rows: min-content auto min-content;
+	/* Above is the same as the following. rows / columns. */
+	/*
+	grid-template: min-content auto min-content / 15em auto 15em;
+	*/
+	/* Can also use the more powerful grid, with just what we want. */
+	/* grid is also recommended, while grid-template is not. */
+	/*
+	grid: min-content auto min-content / 15em auto 15em;
+	*/
 }
 
 header, footer {
